@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const paymentSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
 	{
 		userId: { type: Number, unique: true },
 		name: String,
@@ -12,14 +12,14 @@ const paymentSchema = new mongoose.Schema(
 	}
 );
 
-paymentSchema.pre("save", async function (next) {
+userSchema.pre("save", async function (next) {
 	const user = this;
 	if (!user.isNew) {
 		return next();
 	}
 	try {
 		const lastUser = await mongoose
-			.model("payments", paymentSchema)
+			.model("userPay", userSchema)
 			.findOne({})
 			.sort({ userId: -1 })
 			.exec();
@@ -30,4 +30,4 @@ paymentSchema.pre("save", async function (next) {
 	}
 });
 
-module.exports = mongoose.model("payments", paymentSchema);
+module.exports = mongoose.model("userPay", userSchema);

@@ -1,8 +1,10 @@
 let express = require("express");
 let router = express.Router();
 
-let paymentRoutes = require("./payment.routes");
+let userRoutes = require("./user.routes");
+let feeRoutes = require("./fees.routes");
 
-router.use("/", paymentRoutes);
+router.use("/", userRoutes);
+router.use("/", feeRoutes);
 
 module.exports = router;

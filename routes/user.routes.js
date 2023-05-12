@@ -1,22 +1,21 @@
-const Payment = require("../model/Payment");
+const User = require("../model/User");
 
 const express = require("express");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const paymentRouter = express.Router();
 
-paymentRouter.post("/data", async (req, res) => {
+const userRouter = express.Router();
+
+userRouter.post("/data", async (req, res) => {
 	try {
 		const { name, email, phone } = req.body;
 
 		// Check if user already exists
-		const existingUser = await Payment.findOne({ email });
+		const existingUser = await User.findOne({ email });
 		if (existingUser) {
 			return res.status(400).json({ message: "User already exists" });
 		}
 
 		// Create a new user
-		const user = new Payment({
+		const user = new User({
 			name,
 			email,
 			phone,
@@ -37,4 +36,4 @@ paymentRouter.post("/data", async (req, res) => {
 	}
 });
 
-module.exports = paymentRouter;
+module.exports = userRouter;
