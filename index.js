@@ -3,11 +3,6 @@ const app = express();
 require("./db/db.config");
 
 const router = require("./routes/index");
-const Courses = require("./model/Courses");
-const imageModel = require("./models");
-const AddCPD = require("./model/AddCPD");
-const authMiddleware = require("./middleware/middleware");
-
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
